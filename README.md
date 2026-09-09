@@ -71,16 +71,23 @@ The cycle continues until the student demonstrates understanding or the maximum 
 
 ## 🧠 Understanding Levels
 
-The agent classifies the student's response into three levels:
+The agent classifies the student's understanding into three levels:
 
 ### ✅ UNDERSTOOD
-The student demonstrates correct understanding. The agent confirms the understanding and can provide a mini-quiz question.
+
+The student demonstrates correct understanding. The agent confirms the student's understanding and completes the learning session.
 
 ### 🟡 PARTIALLY_UNDERSTOOD
-The student understands part of the concept but still has gaps. The agent changes its teaching strategy, provides a simpler explanation or analogy, and asks another question.
+
+The student understands part of the concept but still has gaps.
+
+The agent changes its teaching strategy, provides a simpler explanation or analogy, and asks another question.
 
 ### 🔴 STILL_CONFUSED
-The original misconception is still present. The agent simplifies the explanation and generates another diagnostic question.
+
+The original misconception is still present.
+
+The agent simplifies the explanation and generates another diagnostic question.
 
 ---
 
@@ -90,7 +97,7 @@ ConfusionDetect follows an iterative agent cycle:
 
 **Observe → Diagnose → Ask → Evaluate → Decide → Adapt → Re-evaluate**
 
-The agent maintains the current learning session, tracks attempts, evaluates student responses, and decides what action should happen next.
+The agent maintains the current learning session, tracks attempts, evaluates student responses, and determines what action should happen next.
 
 A maximum of three attempts is currently used to prevent an unlimited interaction loop.
 
@@ -108,22 +115,37 @@ A maximum of three attempts is currently used to prevent an unlimited interactio
 
 ## 📁 Project Structure
 
-    ConfusionDetect-AI-Agent/
-    │
-    ├── app.py
-    ├── agent.py
-    ├── tools.py
-    ├── requirements.txt
-    ├── .gitignore
-    └── README.md
+```text
+ConfusionDetect-AI-Agent/
+│
+├── app.py
+├── agent.py
+├── tools.py
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
 
 ### `app.py`
 
-Provides the Streamlit interface and manages session state, student interaction, attempt tracking, agent status, decision history, and the Agent Loop.
+Provides the Streamlit user interface and manages:
+
+- Session state
+- Student interaction
+- Attempt tracking
+- Agent status
+- Decision history
+- Agent Loop
 
 ### `agent.py`
 
-Contains the main AI Agent logic, including misconception analysis, diagnostic questioning, answer evaluation, understanding classification, and teaching-strategy selection.
+Contains the main AI Agent logic, including:
+
+- Misconception analysis
+- Diagnostic question generation
+- Student answer evaluation
+- Understanding classification
+- Adaptive teaching decisions
 
 ### `tools.py`
 
@@ -135,37 +157,55 @@ Reserved for additional agent tools and future extensions.
 
 ### 1. Clone the repository
 
-    git clone https://github.com/NoufAljabri-maker/ConfusionDetect-AI-Agent.git
+```bash
+git clone https://github.com/NoufAljabri-maker/ConfusionDetect-AI-Agent.git
+```
 
-Then enter the project directory:
+Enter the project directory:
 
-    cd ConfusionDetect-AI-Agent
+```bash
+cd ConfusionDetect-AI-Agent
+```
 
 ### 2. Create a virtual environment
 
-    python -m venv venv
+```bash
+python -m venv venv
+```
 
-On Windows, activate it using:
+On Windows, activate the environment:
 
-    venv\Scripts\activate.bat
+```bash
+venv\Scripts\activate.bat
+```
 
 ### 3. Install dependencies
 
-    pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
+```
 
 ### 4. Install Ollama
 
-Install Ollama and download the Llama 3.2 model:
+Install Ollama on your computer.
 
-    ollama pull llama3.2
+Then download the Llama 3.2 model:
+
+```bash
+ollama pull llama3.2
+```
 
 Test the model:
 
-    ollama run llama3.2
+```bash
+ollama run llama3.2
+```
 
 ### 5. Run the application
 
-    python -m streamlit run app.py
+```bash
+python -m streamlit run app.py
+```
 
 The Streamlit application will then open locally in your browser.
 
@@ -177,23 +217,25 @@ The Streamlit application will then open locally in your browser.
 
 > I think RAM and hard disk are the same because both store data.
 
-### Agent Behavior
+### Agent Diagnosis
 
 The agent detects that the student is confusing temporary volatile memory with persistent storage.
 
-It then asks a diagnostic question such as:
+### Diagnostic Question
 
 > What happens to the data stored in RAM when the computer is turned off?
 
-If the student's answer is incorrect, the agent may classify the understanding as:
+If the student's answer is incorrect, the agent may classify the student's understanding as:
 
 **STILL_CONFUSED**
 
-The agent then changes its teaching strategy and continues the learning loop.
+The agent then changes its teaching strategy, provides another explanation, and continues the learning loop.
 
-When the student demonstrates correct understanding, the agent classifies the response as:
+When the student demonstrates correct understanding, the agent may classify the response as:
 
 **UNDERSTOOD**
+
+The learning session can then be completed.
 
 ---
 
@@ -201,21 +243,83 @@ When the student demonstrates correct understanding, the agent classifies the re
 
 ConfusionDetect is designed as more than a traditional question-answer chatbot.
 
-It demonstrates several important AI Agent characteristics:
+It demonstrates several key AI Agent characteristics:
 
-1. **Goal-oriented behavior** — Its goal is to reduce the student's misconception.
+### 1. Goal-Oriented Behavior
 
-2. **Observation** — It observes the student's initial statement and subsequent answers.
+The agent has a clear goal: **reduce or resolve the student's misconception**.
 
-3. **Reasoning and diagnosis** — It identifies misconceptions and evaluates understanding.
+### 2. Observation
 
-4. **Decision making** — It determines whether the student has understood, partially understood, or remains confused.
+The agent observes the student's initial statement and subsequent responses.
 
-5. **Adaptive action** — It changes the teaching strategy according to the student's understanding.
+### 3. Reasoning and Diagnosis
 
-6. **State tracking** — It maintains attempts and interaction history.
+It analyzes the student's input to identify the academic topic and possible misconception.
 
-7. **Iterative behavior** — It repeatedly evaluates and adapts until the learning goal is achieved or the attempt limit is reached.
+### 4. Decision Making
+
+The agent evaluates the student's answer and decides whether the student is:
+
+- UNDERSTOOD
+- PARTIALLY_UNDERSTOOD
+- STILL_CONFUSED
+
+### 5. Adaptive Action
+
+Based on its evaluation, the agent changes its teaching strategy and determines the next action.
+
+### 6. State Tracking
+
+The system maintains the current session, number of attempts, and interaction history.
+
+### 7. Iterative Behavior
+
+The agent repeatedly evaluates and adapts until the learning goal is achieved or the maximum number of attempts is reached.
+
+---
+
+## 🏗️ Agent Architecture
+
+```text
+                    ┌───────────────────┐
+                    │   Student Input   │
+                    └─────────┬─────────┘
+                              ↓
+                    ┌───────────────────┐
+                    │ Misconception     │
+                    │ Diagnosis         │
+                    └─────────┬─────────┘
+                              ↓
+                    ┌───────────────────┐
+                    │ Diagnostic        │
+                    │ Question          │
+                    └─────────┬─────────┘
+                              ↓
+                    ┌───────────────────┐
+                    │ Student Response  │
+                    └─────────┬─────────┘
+                              ↓
+                    ┌───────────────────┐
+                    │ Understanding     │
+                    │ Evaluation        │
+                    └─────────┬─────────┘
+                              ↓
+                    ┌───────────────────┐
+                    │ Decision Engine   │
+                    └─────────┬─────────┘
+                              ↓
+              ┌───────────────┼───────────────┐
+              ↓               ↓               ↓
+         UNDERSTOOD       PARTIALLY       STILL
+                          UNDERSTOOD       CONFUSED
+              ↓               ↓               ↓
+          Complete         Adapt           Re-teach
+                           Strategy
+                              ↓
+                         Re-evaluate
+                              ↺
+```
 
 ---
 
@@ -225,11 +329,12 @@ Future versions could include:
 
 - Long-term student memory
 - Personalized learning profiles
+- Multiple teaching strategies
 - Retrieval-Augmented Generation (RAG)
-- Subject-specific tools
+- Subject-specific knowledge tools
 - Teacher analytics dashboard
 - Student progress tracking
-- Multiple teaching strategies
+- Personalized learning paths
 - Multi-agent collaboration
 
 ---
