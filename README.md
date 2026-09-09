@@ -93,6 +93,14 @@ Run the application:
 
     python -m streamlit run app.py
 
+    ## 📸 Demo
+
+The following screenshot shows ConfusionDetect analyzing a student's misconception and generating a diagnostic question.
+
+![ConfusionDetect AI Agent Demo](confusiondetect-demo.png)
+
+---
+
 ## 🧪 Example
 
 Student input:
