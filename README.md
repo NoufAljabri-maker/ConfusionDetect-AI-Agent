@@ -100,6 +100,12 @@ The following screenshot shows ConfusionDetect analyzing a student's misconcepti
 ![ConfusionDetect AI Agent Demo](confusiondetect-demo.png)
 
 ---
+### Adaptive Agent Decision
+
+The agent evaluates the student's response, detects that the misconception is still present, changes its teaching strategy, and continues the learning loop.
+
+![ConfusionDetect Agent Decision](confusiondetect-agent-decision.png)
+
 
 ## 🧪 Example
 
