@@ -246,4 +246,4 @@ It is not intended to replace teachers or formal educational assessment.
 
 **Nouf Aljabri**
 
-Computer Science & Cybersecurity
+Computer Science 
