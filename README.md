@@ -1,8 +1,8 @@
 # 🧠 ConfusionDetect AI Agent
 
-**ConfusionDetect** is an adaptive AI teaching agent designed to detect student misconceptions, evaluate understanding, and autonomously adapt its teaching strategy.
+**ConfusionDetect** is an adaptive AI teaching agent that detects student misconceptions, evaluates understanding, and changes its teaching strategy based on the student's responses.
 
-Unlike a traditional chatbot that simply answers questions, ConfusionDetect follows an iterative decision-making process to help students correct misunderstandings.
+Unlike a traditional chatbot that simply provides an answer, ConfusionDetect follows an iterative **diagnose → evaluate → decide → adapt** process to help students correct misunderstandings.
 
 ---
 
@@ -14,20 +14,25 @@ For example:
 
 > "I think RAM and hard disk are the same because both store data."
 
-Instead of immediately providing the correct answer, ConfusionDetect diagnoses the misconception, asks a targeted question, evaluates the student's response, and decides what teaching action should happen next.
+Instead of immediately giving the correct answer, ConfusionDetect:
+
+1. Analyzes the student's statement.
+2. Detects the misconception.
+3. Identifies the subject and topic.
+4. Generates a diagnostic question.
+5. Evaluates the student's answer.
+6. Determines the student's understanding level.
+7. Selects the next teaching action.
+8. Re-evaluates the student when necessary.
 
 ---
 
-## 🤖 How the AI Agent Works
-
-The agent follows this adaptive learning cycle:
+## 🤖 Agent Workflow
 
 ```text
 Student Input
       ↓
 Detect Misconception
-      ↓
-Identify Subject & Topic
       ↓
 Ask Diagnostic Question
       ↓
@@ -43,67 +48,76 @@ Evaluate Understanding
              ↓
 Choose Teaching Strategy
              ↓
-Re-explain / Follow-up Question
+Re-explain / Ask Again
              ↓
 Re-evaluate
              ↺
 ```
 
-The cycle continues until the student demonstrates understanding or the maximum number of attempts is reached.
+The loop continues until the student demonstrates understanding or reaches the maximum number of attempts.
 
 ---
 
-## ✨ Main Features
+## ✨ Key Features
 
 - 🧠 Misconception detection
 - 📚 Subject and topic identification
-- ❓ Automatic diagnostic question generation
-- 🔍 Student answer evaluation
+- ❓ Diagnostic question generation
+- 🔍 Student-answer evaluation
 - 🎯 Understanding-level classification
 - 🔄 Adaptive teaching strategy
 - 🧩 Multi-step Agent Loop
-- 📝 Interaction history
+- 📝 Session state and interaction history
 - 💻 Local LLM execution
 - 🔐 No paid API required
-- 🌐 Interactive Streamlit interface
+- 🌐 Streamlit user interface
 
 ---
 
-## 🧠 Understanding Levels
+## 🧠 Agent Decision Making
 
-The agent classifies the student's understanding into three levels:
+The agent classifies student understanding into three states:
 
 ### ✅ UNDERSTOOD
 
-The student demonstrates correct understanding. The agent confirms the student's understanding and completes the learning session.
+The student demonstrates correct understanding and the learning session can be completed.
 
 ### 🟡 PARTIALLY_UNDERSTOOD
 
 The student understands part of the concept but still has gaps.
 
-The agent changes its teaching strategy, provides a simpler explanation or analogy, and asks another question.
+The agent changes its teaching approach and asks another question.
 
 ### 🔴 STILL_CONFUSED
 
-The original misconception is still present.
+The misconception is still present.
 
-The agent simplifies the explanation and generates another diagnostic question.
+The agent simplifies the explanation and generates a new diagnostic question.
 
 ---
 
-## 🔄 Agent Decision Loop
+## 🤖 Why Is This an AI Agent?
 
-ConfusionDetect follows an iterative agent cycle:
+ConfusionDetect is designed as more than a question-answer chatbot.
+
+It demonstrates key agentic characteristics:
+
+- **Goal:** Resolve the student's misconception.
+- **Observation:** Analyze student statements and responses.
+- **Reasoning:** Diagnose misconceptions and evaluate understanding.
+- **Decision Making:** Determine the student's current understanding level.
+- **Action:** Select an appropriate teaching response.
+- **Adaptation:** Change the teaching strategy when needed.
+- **State:** Track attempts and interaction history.
+- **Loop:** Continue evaluating until the learning goal is achieved.
+
+### Agent Cycle
 
 **Observe → Diagnose → Ask → Evaluate → Decide → Adapt → Re-evaluate**
 
-The agent maintains the current learning session, tracks attempts, evaluates student responses, and determines what action should happen next.
-
-A maximum of three attempts is currently used to prevent an unlimited interaction loop.
-
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Technologies
 
 - Python
 - Streamlit
@@ -126,30 +140,14 @@ ConfusionDetect-AI-Agent/
 └── README.md
 ```
 
-### `app.py`
+**app.py**  
+Streamlit interface, session state, attempt tracking, and Agent Loop.
 
-Provides the Streamlit user interface and manages:
+**agent.py**  
+Misconception analysis, diagnostic questioning, answer evaluation, and adaptive teaching decisions.
 
-- Session state
-- Student interaction
-- Attempt tracking
-- Agent status
-- Decision history
-- Agent Loop
-
-### `agent.py`
-
-Contains the main AI Agent logic, including:
-
-- Misconception analysis
-- Diagnostic question generation
-- Student answer evaluation
-- Understanding classification
-- Adaptive teaching decisions
-
-### `tools.py`
-
-Reserved for additional agent tools and future extensions.
+**tools.py**  
+Reserved for future agent tools and extensions.
 
 ---
 
@@ -161,53 +159,45 @@ Reserved for additional agent tools and future extensions.
 git clone https://github.com/NoufAljabri-maker/ConfusionDetect-AI-Agent.git
 ```
 
-Enter the project directory:
+### 2. Enter the project directory
 
 ```bash
 cd ConfusionDetect-AI-Agent
 ```
 
-### 2. Create a virtual environment
+### 3. Create a virtual environment
 
 ```bash
 python -m venv venv
 ```
 
-On Windows, activate the environment:
+On Windows:
 
 ```bash
 venv\Scripts\activate.bat
 ```
 
-### 3. Install dependencies
+### 4. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Install Ollama
+### 5. Install and prepare Ollama
 
-Install Ollama on your computer.
-
-Then download the Llama 3.2 model:
+Install Ollama, then download the model:
 
 ```bash
 ollama pull llama3.2
 ```
 
-Test the model:
-
-```bash
-ollama run llama3.2
-```
-
-### 5. Run the application
+### 6. Run the application
 
 ```bash
 python -m streamlit run app.py
 ```
 
-The Streamlit application will then open locally in your browser.
+The application will run locally in your browser.
 
 ---
 
@@ -219,129 +209,41 @@ The Streamlit application will then open locally in your browser.
 
 ### Agent Diagnosis
 
-The agent detects that the student is confusing temporary volatile memory with persistent storage.
+The agent detects that the student is confusing **temporary volatile memory** with **persistent storage**.
 
 ### Diagnostic Question
 
 > What happens to the data stored in RAM when the computer is turned off?
 
-If the student's answer is incorrect, the agent may classify the student's understanding as:
+If the student answers incorrectly:
 
-**STILL_CONFUSED**
+**STILL_CONFUSED → Re-explain → Ask another question**
 
-The agent then changes its teaching strategy, provides another explanation, and continues the learning loop.
+If the student demonstrates correct understanding:
 
-When the student demonstrates correct understanding, the agent may classify the response as:
+**UNDERSTOOD → Complete the learning session**
 
-**UNDERSTOOD**
-
-The learning session can then be completed.
+This demonstrates that the next action is selected based on the student's response rather than following a fixed question-answer sequence.
 
 ---
 
-## 🤖 Why Is This an AI Agent?
+## 🚀 Future Work
 
-ConfusionDetect is designed as more than a traditional question-answer chatbot.
-
-It demonstrates several key AI Agent characteristics:
-
-### 1. Goal-Oriented Behavior
-
-The agent has a clear goal: **reduce or resolve the student's misconception**.
-
-### 2. Observation
-
-The agent observes the student's initial statement and subsequent responses.
-
-### 3. Reasoning and Diagnosis
-
-It analyzes the student's input to identify the academic topic and possible misconception.
-
-### 4. Decision Making
-
-The agent evaluates the student's answer and decides whether the student is:
-
-- UNDERSTOOD
-- PARTIALLY_UNDERSTOOD
-- STILL_CONFUSED
-
-### 5. Adaptive Action
-
-Based on its evaluation, the agent changes its teaching strategy and determines the next action.
-
-### 6. State Tracking
-
-The system maintains the current session, number of attempts, and interaction history.
-
-### 7. Iterative Behavior
-
-The agent repeatedly evaluates and adapts until the learning goal is achieved or the maximum number of attempts is reached.
-
----
-
-## 🏗️ Agent Architecture
-
-```text
-                    ┌───────────────────┐
-                    │   Student Input   │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ Misconception     │
-                    │ Diagnosis         │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ Diagnostic        │
-                    │ Question          │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ Student Response  │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ Understanding     │
-                    │ Evaluation        │
-                    └─────────┬─────────┘
-                              ↓
-                    ┌───────────────────┐
-                    │ Decision Engine   │
-                    └─────────┬─────────┘
-                              ↓
-              ┌───────────────┼───────────────┐
-              ↓               ↓               ↓
-         UNDERSTOOD       PARTIALLY       STILL
-                          UNDERSTOOD       CONFUSED
-              ↓               ↓               ↓
-          Complete         Adapt           Re-teach
-                           Strategy
-                              ↓
-                         Re-evaluate
-                              ↺
-```
-
----
-
-## 🚀 Future Improvements
-
-Future versions could include:
+Future versions may include:
 
 - Long-term student memory
 - Personalized learning profiles
-- Multiple teaching strategies
 - Retrieval-Augmented Generation (RAG)
-- Subject-specific knowledge tools
+- Subject-specific agent tools
 - Teacher analytics dashboard
 - Student progress tracking
-- Personalized learning paths
 - Multi-agent collaboration
 
 ---
 
 ## ⚠️ Disclaimer
 
-ConfusionDetect is an educational prototype developed to demonstrate adaptive AI Agent concepts.
+ConfusionDetect is an educational prototype developed to demonstrate adaptive AI Agent behavior.
 
 It is not intended to replace teachers or formal educational assessment.
 
@@ -349,6 +251,5 @@ It is not intended to replace teachers or formal educational assessment.
 
 ## 👩‍💻 Author
 
-**Nouf Aljabri**
-
+**Nouf Aljabri**  
 Computer Science 
