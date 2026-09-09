@@ -1,53 +1,49 @@
 # 🧠 ConfusionDetect AI Agent
 
-ConfusionDetect is an adaptive AI teaching agent that identifies student misconceptions, asks diagnostic questions, evaluates understanding, and changes its teaching strategy based on the student's responses.
+**ConfusionDetect** is an adaptive AI teaching agent designed to detect student misconceptions, evaluate understanding, and autonomously adapt its teaching strategy.
 
-The project is designed to clearly demonstrate the core behavior of an AI Agent:
-
-**Observe → Diagnose → Ask → Evaluate → Decide → Adapt → Re-evaluate**
+Unlike a traditional chatbot that simply answers questions, ConfusionDetect follows an iterative decision-making process to help students correct misunderstandings.
 
 ---
 
-## 🚀 Project Idea
+## 🎯 Project Goal
 
-Traditional educational chatbots usually provide a direct answer to a student's question.
+Students often have misconceptions rather than simply missing information.
 
-ConfusionDetect works differently.
+For example:
 
-Instead of immediately giving the answer, the agent:
+> "I think RAM and hard disk are the same because both store data."
 
-1. Analyzes the student's statement.
-2. Detects the possible misconception.
-3. Identifies the academic subject and topic.
-4. Asks a diagnostic question.
-5. Evaluates the student's response.
-6. Determines the student's understanding level.
-7. Adapts its teaching strategy.
-8. Repeats the process when needed.
+Instead of immediately providing the correct answer, ConfusionDetect diagnoses the misconception, asks a targeted question, evaluates the student's response, and decides what teaching action should happen next.
 
 ---
 
-## 🤖 Agent Workflow
+## 🤖 How the AI Agent Works
+
+The agent follows this adaptive learning cycle:
 
 ```text
 Student Input
       ↓
-Misconception Detection
+Detect Misconception
       ↓
-Diagnostic Question
+Identify Subject & Topic
       ↓
-Student Response
+Ask Diagnostic Question
       ↓
-Understanding Evaluation
+Student Answer
       ↓
-┌───────────────────────────┐
-│ UNDERSTOOD                │
-│ PARTIALLY_UNDERSTOOD      │
-│ STILL_CONFUSED            │
-└─────────────┬─────────────┘
-              ↓
-Adaptive Teaching Strategy
-              ↓
-New Question / Mini Quiz
-              ↓
-Re-evaluation
+Evaluate Understanding
+      ↓
+┌─────────────────────────┐
+│ UNDERSTOOD              │
+│ PARTIALLY_UNDERSTOOD    │
+│ STILL_CONFUSED          │
+└────────────┬────────────┘
+             ↓
+Choose Teaching Strategy
+             ↓
+Re-explain / Follow-up Question
+             ↓
+Re-evaluate
+             ↺
